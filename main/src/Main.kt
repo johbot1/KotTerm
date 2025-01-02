@@ -3,23 +3,47 @@
 // Desc: Handles the processing of user inputs, and acts as intermediary between
 //       input and calculation.
 
-import kotlin.concurrent.thread //Used to delay the result to be able to see it.
-
 const val running = true
-      val acceptedValues = listOf(
-        "+","-","/","*","H","h"
+      val acceptedCalcValues = listOf(
+        "+","-","/","*"
     )
+      val acceptedAlphaValues = listOf(
+            "H","h","T","t","Q","q"
+        )
 
-//Addition: Adds two numbers together, returning their sum and the equation itself for reference
-fun addition(a: Double, b: Double): Pair<Double, String> {
-    val c = a + b
-    val t = " $a + $b = $c "
-    return Pair(c,t)
+//alphaBehavior: When the input is alphabetical,
+fun alphaBehavior(input: String, tickerTape: List<String>) {
+    //Ticker Tape: Print out all the past equations
+    if (input == "t") {
+        if (tickerTape.isEmpty()){
+            println("Empty! Try running some equations!")
+        }else{
+            for ((index, equation) in tickerTape.withIndex()) {
+                println("Equation $index): $equation")
+            }
+        }
+        println(" ")
+        Thread.sleep(2000)
+
+    }else if (input == "h") {
+        println("Welcome! This is a calculator")
+        Thread.sleep(1500)
+        println("To navigate, use the symbol in the parentheses next to the operation you want to use to select it")
+        Thread.sleep(1500)
+        println("Once in the operation, it will direct you to enter your first number, followed by the next number.")
+        Thread.sleep(1500)
+        println("To quit, at any time hit 'Q'!")
+        Thread.sleep(1500)
+        println("Happy Calculating!")
+        Thread.sleep(3000)
+
+    }
 }
+
 
 //Main: Begins, ends, and handles inputs for the program
 fun main() {
-    var tickerTape = ""
+    val tickerTape = mutableListOf<String>()
     //Introductory Information
     println("Calculator")
     println("For help, press (H) to view the FAQ")
@@ -36,30 +60,34 @@ fun main() {
     Ticker Tape (T)
     Quit (Q)
 """)
-//Reads in the input and saves it as a variable
-    var operatorSelection = readlnOrNull()
-        if (acceptedValues.contains(operatorSelection)) {
-            operatorSelection = operatorSelection.toString()
-
-//            TODO: Check if operatorSelection is a letter; implement behaviour based on that
-
+//Reads in the input and saves it as a variable only if it's a string
+    var operatorSelection = readlnOrNull().toString()
+        //Validate the input; If not part of acceptedCalcValues, or acceptedAlphaValues, error out
+        if (acceptedCalcValues.contains(operatorSelection)) {
             print("Enter your first number: ")
             val addNumberOne= readlnOrNull()?.toDoubleOrNull() ?: 0.0
             print("Enter your second number: ")
             val addNumberTwo= readlnOrNull()?.toDoubleOrNull() ?: 0.0
             val result = calculate(addNumberOne,addNumberTwo, operatorSelection)
-            tickerTape += result.equation
+            tickerTape.add(result.equation)
 
             println("Result: ${result.result}")
             Thread.sleep(2000)
 
+        }else if (acceptedAlphaValues.contains(operatorSelection)) {
+            operatorSelection = operatorSelection.lowercase()
+            if (operatorSelection.lowercase() != "q") {
+                alphaBehavior(operatorSelection, tickerTape)
+            }else{
+                println("Thank you for using this calculator!")
+                break
+            }
 
-
-        } else if (operatorSelection.isNullOrBlank()  || !acceptedValues.contains(operatorSelection)) {
+        }
+        else if (operatorSelection.isBlank()  || !acceptedCalcValues.contains(operatorSelection)) {
             println("Sorry what you entered was invalid. Please refer to the symbol in parentheses to choose your operation:")
             continue
         }
 
     }
-    println("Thank you for using this calculator!")
 }

@@ -3,9 +3,11 @@
 // Desc: Handles the calculations via a data class, returning the found value
 //       as well as a string version of the equation
 
+//CalculationResult: A data class consisting of a result Double and an equation String
+//Both are to be returned, with the result printed immediately and the equation added to the ticker tape.
 data class CalculationResult(val result: Double, val equation: String)
-var tickerTape = ""
 
+//Calculate: Runs the requested operation and returns a CalculationResult
 fun calculate(num1: Double, num2: Double, operator: String): CalculationResult {
     //Kotlin Case/Switch Statement
     //Now it's a "when"/""->{} statement
