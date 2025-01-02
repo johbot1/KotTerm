@@ -4,14 +4,14 @@
 //       input and calculation.
 
 const val running = true
-      val acceptedCalcValues = listOf(
+val acceptedCalcValues = listOf(
         "+","-","/","*"
     )
-      val acceptedAlphaValues = listOf(
+val acceptedAlphaValues = listOf(
             "H","h","T","t","Q","q"
         )
 
-//alphaBehavior: When the input is alphabetical,
+//alphaBehavior: When the input is alphabetical, the behavior is changed from operations to information display.
 fun alphaBehavior(input: String, tickerTape: List<String>) {
     //Ticker Tape: Print out all the past equations
     if (input == "t") {
@@ -60,7 +60,8 @@ fun main() {
     Ticker Tape (T)
     Quit (Q)
 """)
-//Reads in the input and saves it as a variable only if it's a string
+
+//Reads in the input and saves it as a variable ONLY if it's a string
     var operatorSelection = readlnOrNull().toString()
         //Validate the input; If not part of acceptedCalcValues, or acceptedAlphaValues, error out
         if (acceptedCalcValues.contains(operatorSelection)) {
@@ -88,6 +89,5 @@ fun main() {
             println("Sorry what you entered was invalid. Please refer to the symbol in parentheses to choose your operation:")
             continue
         }
-
     }
 }
