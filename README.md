@@ -3,13 +3,10 @@ One of three Kotlin related projects for my final semester, this one a Terminal 
 
 
 # Requirements
-Kotlin v2.1.10 (JRE 23.0.2)
-Java v23.0.2
-
-Ensure you have Kotlin by running the following command in a terminal
-`kotlin -version` 
-Ensure you have a Java Runtime Environment (JRE) by running the following command in a terminal
-`java - version
+- Kotlin v2.1.10 (JRE 23.0.2)
+  - Ensure you have Kotlin by running the following command in a terminal: `kotlin -version`
+- Java v23.0.2
+  - Ensure you have a Java Runtime Environment (JRE) by running the following command in a terminal: `java - version
 
 # How to Run:
 - Download the files, then navigate to the directory they are stored in via a command line
