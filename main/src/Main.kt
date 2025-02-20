@@ -5,19 +5,19 @@
 
 const val running = true
 val acceptedCalcValues = listOf(
-        "+","-","/","*"
-    )
+    "+", "-", "/", "*"
+)
 val acceptedAlphaValues = listOf(
-            "H","h","T","t","Q","q"
-        )
+    "H", "h", "T", "t", "Q", "q"
+)
 
 //alphaBehavior: When the input is alphabetical, the behavior is changed from operations to information display.
 fun alphaBehavior(input: String, tickerTape: List<String>) {
     //Ticker Tape: Print out all the past equations
     if (input == "t") {
-        if (tickerTape.isEmpty()){
+        if (tickerTape.isEmpty()) {
             println("Empty! Try running some equations!")
-        }else{
+        } else {
             for ((index, equation) in tickerTape.withIndex()) {
                 println("Equation $index): $equation")
             }
@@ -25,7 +25,7 @@ fun alphaBehavior(input: String, tickerTape: List<String>) {
         println(" ")
         Thread.sleep(2000)
 
-    }else if (input == "h") {
+    } else if (input == "h") {
         println("Welcome! This is a calculator")
         Thread.sleep(1500)
         println("To navigate, use the symbol in the parentheses next to the operation you want to use to select it")
@@ -50,8 +50,9 @@ fun main() {
 
     //Main Loop
     while (running) {
-    println("Please select your operation:")
-        println("""
+        println("Please select your operation:")
+        println(
+            """
     Addition (+)
     Subtraction (-)
     Multiplication (*)
@@ -59,33 +60,33 @@ fun main() {
     Help (H)
     Ticker Tape (T)
     Quit (Q)
-""")
+"""
+        )
 
 //Reads in the input and saves it as a variable ONLY if it's a string
-    var operatorSelection = readlnOrNull().toString()
+        var operatorSelection = readlnOrNull().toString()
         //Validate the input; If not part of acceptedCalcValues, or acceptedAlphaValues, error out
         if (acceptedCalcValues.contains(operatorSelection)) {
             print("Enter your first number: ")
-            val addNumberOne= readlnOrNull()?.toDoubleOrNull() ?: 0.0
+            val addNumberOne = readlnOrNull()?.toDoubleOrNull() ?: 0.0
             print("Enter your second number: ")
-            val addNumberTwo= readlnOrNull()?.toDoubleOrNull() ?: 0.0
-            val result = calculate(addNumberOne,addNumberTwo, operatorSelection)
+            val addNumberTwo = readlnOrNull()?.toDoubleOrNull() ?: 0.0
+            val result = calculate(addNumberOne, addNumberTwo, operatorSelection)
             tickerTape.add(result.equation)
 
             println("Result: ${result.result}")
             Thread.sleep(2000)
 
-        }else if (acceptedAlphaValues.contains(operatorSelection)) {
+        } else if (acceptedAlphaValues.contains(operatorSelection)) {
             operatorSelection = operatorSelection.lowercase()
             if (operatorSelection.lowercase() != "q") {
                 alphaBehavior(operatorSelection, tickerTape)
-            }else{
+            } else {
                 println("Thank you for using this calculator!")
                 break
             }
 
-        }
-        else if (operatorSelection.isBlank()  || !acceptedCalcValues.contains(operatorSelection)) {
+        } else if (operatorSelection.isBlank() || !acceptedCalcValues.contains(operatorSelection)) {
             println("Sorry what you entered was invalid. Please refer to the symbol in parentheses to choose your operation:")
             continue
         }

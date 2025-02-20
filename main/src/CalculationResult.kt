@@ -11,7 +11,7 @@ data class CalculationResult(val result: Double, val equation: String)
 fun calculate(num1: Double, num2: Double, operator: String): CalculationResult {
     //Kotlin Case/Switch Statement
     //Now it's a "when"/""->{} statement
-    return when(operator){
+    return when (operator) {
         "+" -> CalculationResult(num1 + num2, " $num1 + $num2 = ${num1 + num2} ")
         "-" -> CalculationResult(num1 - num2, " $num1 - $num2 = ${num1 - num2} ")
         "*" -> CalculationResult(num1 * num2, " $num1 * $num2 = ${num1 * num2} ")
@@ -22,6 +22,7 @@ fun calculate(num1: Double, num2: Double, operator: String): CalculationResult {
                 CalculationResult(0.0, "Error: Division by zero")
             }
         }
+
         else -> CalculationResult(0.0, "Invalid operator")
     }
 }
